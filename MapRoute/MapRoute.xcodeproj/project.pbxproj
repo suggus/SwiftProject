@@ -8,18 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		0DE9B7B5E166F1AE46D86CA7 /* Pods_MapRoute.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D9E05CBF683B487A28C9308 /* Pods_MapRoute.framework */; };
+		C3336FE423F5C86D00A22E5C /* DatosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3336FE323F5C86D00A22E5C /* DatosViewController.swift */; };
+		C3336FE623F5D66700A22E5C /* MitablaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3336FE523F5D66700A22E5C /* MitablaTableViewController.swift */; };
+		C334DFE823FD9E75005356AB /* MiCelda TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C334DFE723FD9E75005356AB /* MiCelda TableViewCell.swift */; };
 		C33CB20B23D24D0D0023F200 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33CB20A23D24D0D0023F200 /* AppDelegate.swift */; };
 		C33CB20D23D24D0D0023F200 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33CB20C23D24D0D0023F200 /* SceneDelegate.swift */; };
 		C33CB20F23D24D0D0023F200 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C33CB20E23D24D0D0023F200 /* ViewController.swift */; };
 		C33CB21223D24D0D0023F200 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33CB21023D24D0D0023F200 /* Main.storyboard */; };
 		C33CB21423D24D0E0023F200 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C33CB21323D24D0E0023F200 /* Assets.xcassets */; };
 		C33CB21723D24D0E0023F200 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33CB21523D24D0E0023F200 /* LaunchScreen.storyboard */; };
+		C39D3F2423E4A6DC00631BE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C39D3F2323E4A6DC00631BE2 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5D9E05CBF683B487A28C9308 /* Pods_MapRoute.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapRoute.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		992CECCAC20D108D191E86CE /* Pods-MapRoute.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapRoute.release.xcconfig"; path = "Target Support Files/Pods-MapRoute/Pods-MapRoute.release.xcconfig"; sourceTree = "<group>"; };
 		99ED95DDF9C49380450FB746 /* Pods-MapRoute.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapRoute.debug.xcconfig"; path = "Target Support Files/Pods-MapRoute/Pods-MapRoute.debug.xcconfig"; sourceTree = "<group>"; };
+		C3336FE323F5C86D00A22E5C /* DatosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatosViewController.swift; sourceTree = "<group>"; };
+		C3336FE523F5D66700A22E5C /* MitablaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MitablaTableViewController.swift; sourceTree = "<group>"; };
+		C334DFE723FD9E75005356AB /* MiCelda TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MiCelda TableViewCell.swift"; sourceTree = "<group>"; };
 		C33CB20723D24D0D0023F200 /* MapRoute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapRoute.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C33CB20A23D24D0D0023F200 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C33CB20C23D24D0D0023F200 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +35,7 @@
 		C33CB21323D24D0E0023F200 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C33CB21623D24D0E0023F200 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C33CB21823D24D0E0023F200 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C39D3F2323E4A6DC00631BE2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +56,6 @@
 				99ED95DDF9C49380450FB746 /* Pods-MapRoute.debug.xcconfig */,
 				992CECCAC20D108D191E86CE /* Pods-MapRoute.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -84,10 +91,14 @@
 				C33CB20A23D24D0D0023F200 /* AppDelegate.swift */,
 				C33CB20C23D24D0D0023F200 /* SceneDelegate.swift */,
 				C33CB20E23D24D0D0023F200 /* ViewController.swift */,
+				C3336FE323F5C86D00A22E5C /* DatosViewController.swift */,
+				C39D3F2323E4A6DC00631BE2 /* MapViewController.swift */,
 				C33CB21023D24D0D0023F200 /* Main.storyboard */,
 				C33CB21323D24D0E0023F200 /* Assets.xcassets */,
 				C33CB21523D24D0E0023F200 /* LaunchScreen.storyboard */,
 				C33CB21823D24D0E0023F200 /* Info.plist */,
+				C3336FE523F5D66700A22E5C /* MitablaTableViewController.swift */,
+				C334DFE723FD9E75005356AB /* MiCelda TableViewCell.swift */,
 			);
 			path = MapRoute;
 			sourceTree = "<group>";
@@ -192,6 +203,10 @@
 				C33CB20F23D24D0D0023F200 /* ViewController.swift in Sources */,
 				C33CB20B23D24D0D0023F200 /* AppDelegate.swift in Sources */,
 				C33CB20D23D24D0D0023F200 /* SceneDelegate.swift in Sources */,
+				C3336FE423F5C86D00A22E5C /* DatosViewController.swift in Sources */,
+				C3336FE623F5D66700A22E5C /* MitablaTableViewController.swift in Sources */,
+				C334DFE823FD9E75005356AB /* MiCelda TableViewCell.swift in Sources */,
+				C39D3F2423E4A6DC00631BE2 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
