@@ -1,0 +1,483 @@
+//------EjemplosSwiftUIApp.swift-----------------
+
+//
+//  EjemplosSwiftUIApp.swift
+//  EjemplosSwiftUI
+//
+//  Created by Ion Jaureguialzo Sarasola on 27/11/20.
+//
+import SwiftUI
+
+@main
+struct EjemplosSwiftUIApp: App {
+    var body: some Scene { // 3 escenas predefinidas(window/document/setting). Otras podemos crear nosotros
+        WindowGroup { // otra escena es settings (ajustes de aplicación)
+            ContentView() // estamos definiendo la vista (lo que se va a renderizar)
+        }
+    }
+}
+
+//--------ContentView.swift------------------------
+
+//
+//  ContentView.swift
+//  EjemplosSwiftUI
+//
+//  Created by Ion Jaureguialzo Sarasola on 27/11/20.
+//
+import SwiftUI
+
+// REF: SwiftUI: https://developer.apple.com/documentation/swiftui
+// REF: Vistas y controles: https://developer.apple.com/documentation/swiftui/views-and-controls
+// REF: Qué es ese "some" https://applecoding.com/pildoras-codigo/swift-some-tipos-opacos-retorno
+struct ContentView: View {
+    var body: some View {
+
+        NavigationView { //Elemento contenedor (es una vista de navegación)
+
+            List() { // puedes poner un VStack u otra estructura. La lista con constuctor o sin él
+                NavigationLink("Text", destination: EjemploText().navigationTitle("Etiquetas"))
+                NavigationLink("TextField", destination: EjemploTextField().navigationTitle("Entrada de texto"))
+                NavigationLink("Image", destination: EjemploImage().navigationTitle("Imagen"))
+                NavigationLink("Button", destination: EjemploButton().navigationTitle("Botones"))
+                NavigationLink("Toggle", destination: EjemploToggle().navigationTitle("Interruptores"))
+                NavigationLink("Picker", destination: EjemploPicker().navigationTitle("Selectores"))
+                NavigationLink("Slider", destination: EjemploSlider().navigationTitle("Sliders"))
+                NavigationLink("Shapes", destination: EjemploRotacion().navigationTitle("Figuras"))
+                //NavigationLink("Mi prueba", destination: Prueba()).navigationTitle("SwiftUIPrueba"))
+                Link("SwiftUI", destination: URL(string: "https://developer.apple.com/xcode/swiftui/")!) //Permite cargar una referencia externa
+            }
+                .navigationBarTitle("Ejemplos")
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+//--------------EjemploText.swift-----------------//son vistas completas (new file/SwiftUI View/ Prueba.swift/create)
+
+//
+//  EjemploText.swift
+//  EjemplosSwiftUI
+//
+//  Created by Ion Jaureguialzo Sarasola on 27/11/20.
+//
+import SwiftUI
+
+// REF: Text: https://developer.apple.com/documentation/swiftui/text
+struct EjemploText: View {
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("Hamlet")
+				//.foregroundColor(.blue)
+				//.background(Color.red)
+                .font(.title)
+            Text("by William Shakespeare")
+                .font(.system(size: 12, weight: .light, design: .serif))
+                .italic()
+            Text("To be, or not to be, that is the question:")
+                .frame(width: 100)
+				//.padding(.horizontal,40)
+            Text("Brevity is the soul of wit.")
+                .frame(width: 100)
+                .lineLimit(1)
+        }
+    }
+}
+
+struct EjemploText_Previews: PreviewProvider {
+    static var previews: some View {
+        EjemploText()
+    }
+}
+
+//----------EjemploTextField.swift----------------
+
+//
+//  EjemploTextField.swift
+//  EjemplosSwiftUI
+//
+//  Created by Ion Jaureguialzo Sarasola on 27/11/20.
+//
+import SwiftUI
+
+// REF: TextField: https://developer.apple.com/documentation/swiftui/textfield
+struct EjemploTextField: View {
+
+    @State private var username: String = ""
+    @State private var isEditing = false
+
+    var body: some View {
+        VStack(spacing: 20) { //VStack puede recibir parámetros
+
+            TextField(
+                "User name (email address)", //propiedad hint
+                text: $username
+            ) { estado in //esto es una CLAUSURA. estado es el parámetro de la clausura
+                self.isEditing = estado
+            } onCommit: { //evento
+                if(validate(name: username)) { //FUNCIÓN de validación que puede hacer mil cosas(ir a una BBDD, comprobar no se qué,...)
+                    print("Ok")
+                } else {
+                    print("Error")
+                }
+            }
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .padding(.horizontal, 30)
+
+            Text(username) //label que muestra la variable de estado username. Se refresca al momento
+                .foregroundColor(isEditing ? .red : .blue)
+
+        }
+            .textFieldStyle(RoundedBorderTextFieldStyle())// se le puede dar un aspecto mejor que el determinado
+    }
+
+    func validate(name: String) -> Bool {
+        return name.count > 5
+    }
+}
+
+struct EjemploTextField_Previews: PreviewProvider {
+    static var previews: some View {
+        EjemploTextField()
+    }
+}
+
+//------------EjemploImage.swift------------------
+
+//
+//  EjemploImage.swift
+//  EjemplosSwiftUI
+//
+//  Created by Ion Jaureguialzo Sarasola on 27/11/20.
+//
+import SwiftUI
+
+// REF: Image: https://developer.apple.com/documentation/swiftui/image
+// REF: Modificadores: https://developer.apple.com/documentation/swiftui/image-view-modifiers
+// REF: SF Symbols: https://developer.apple.com/sf-symbols/
+struct EjemploImage: View {
+	
+	//MARK: - Este es el body
+
+    var body: some View {
+
+        VStack {
+            Spacer()
+
+            Image("Noa") //esta imagen está en la carpeta ASSETS (3 imágenes, 1 para cada resolución)
+				// ASSETS/image set -> crea nueva imagen(freepik, formato vectorial) -> exportar en 3 formatos.png diferentes(1x,2x,3x)
+                .mask(Circle())
+                .shadow(radius: 10)
+				//.clipShape(Circle())
+				//.overlay()
+
+            Spacer() //podemos intercalar varios spacers a gusto
+                .frame(height: 100)
+
+            HStack() { // estos iconos son predefinidos y se comportan como text(ver link arriba) -> SF-Symbols 2.1
+                Image(systemName: "phone.circle.fill")
+                    .font(.largeTitle)
+
+                Image(systemName: "phone.down.circle.fill")
+                    .renderingMode(.original)
+                    .font(.largeTitle)
+
+                Image(systemName: "message.circle.fill")
+                    .renderingMode(.original)
+                    .font(.largeTitle)
+            }
+
+            Spacer()
+        }
+    }
+}
+
+struct EjemploImage_Previews: PreviewProvider {
+    static var previews: some View {
+        EjemploImage()
+    }
+}
+
+//-----------EjemploButton.swift------------------
+//
+//  EjemploButton.swift
+//  EjemplosSwiftUI
+//
+//  Created by Ion Jaureguialzo Sarasola on 27/11/20.
+//
+import SwiftUI
+
+// REF: Button: https://developer.apple.com/documentation/swiftui/button
+struct EjemploButton: View {
+    var body: some View {
+
+        VStack(spacing: 20) {
+
+            Button("Register", action: register) //función que quiero que se ejecute
+
+            HStack(spacing: 20) {
+
+                Button(action: signIn) {
+                    Text("Sign In")
+                }
+
+                Button("Log Out", action: { //función creando una clausura (función anónima)
+                    logOut(usuario: "root")
+                })
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.red)
+                    .cornerRadius(10.0)
+            }
+        }
+    }
+
+    func signIn() {
+        print("Iniciar sesión")
+    }
+
+    func logOut(usuario: String) {
+        print("Cerrar sesión de \(usuario)")
+    }
+
+    func register() {
+        print("Registrarse")
+    }
+}
+
+struct EjemploButton_Previews: PreviewProvider {
+    static var previews: some View {
+        EjemploButton()
+    }
+}
+
+//------------EjemploToggle.swift------------------
+
+//
+//  EjemploToggle.swift
+//  EjemplosSwiftUI
+//
+//  Created by Ion Jaureguialzo Sarasola on 27/11/20.
+//
+import SwiftUI
+
+// REF: Toggle: https://developer.apple.com/documentation/swiftui/toggle
+// REF: SF Symbols: https://developer.apple.com/sf-symbols/
+struct EjemploToggle: View {
+
+    @State private var vibrateOnRing = false
+
+    var body: some View {
+        VStack {
+            Toggle(isOn: $vibrateOnRing) {
+                Text("Vibrate on Ring")
+            }
+
+            Toggle("Vibrate on Ring", isOn: $vibrateOnRing)
+
+            Toggle(isOn: $vibrateOnRing) {
+                HStack {
+                    Image(systemName: "dot.radiowaves.left.and.right")
+                    Text("Vibrate on Ring")
+                }
+            }
+        }
+            .padding(.horizontal, 40)
+    }
+}
+
+struct EjemploToggle_Previews: PreviewProvider {
+    static var previews: some View {
+        EjemploToggle()
+    }
+}
+
+//----------EjemploPicker.swift---------------------
+
+//
+//  EjemploPicker.swift
+//  EjemplosSwiftUI
+//
+//  Created by Ion Jaureguialzo Sarasola on 27/11/20.
+//
+import SwiftUI
+
+// REF: Picker: https://developer.apple.com/documentation/swiftui/picker
+enum Flavor: String, CaseIterable, Identifiable {
+    case chocolate
+    case vanilla
+    case strawberry
+
+    var id: String { self.rawValue }
+}
+
+struct EjemploPicker: View {
+
+    @State private var selectedFlavor = Flavor.chocolate
+    @State private var selectedTopping = Flavor.vanilla
+
+    var body: some View {
+        VStack {
+            Divider() //Línea de separación
+
+            Picker("Flavor", selection: $selectedFlavor) {
+                Text("Chocolate").tag(Flavor.chocolate) //Pintamos los valores de un enum
+                Text("Vanilla").tag(Flavor.vanilla)
+                Text("Strawberry").tag(Flavor.strawberry)
+            }
+
+            Divider()
+
+            Spacer()
+                .frame(height: 100)
+
+            Divider()
+
+            // REF: Identificador único para cada caso: https://www.hackingwithswift.com/books/ios-swiftui/why-does-self-work-for-foreach
+            Picker("Topping", selection: $selectedTopping) {
+                ForEach(Flavor.allCases, id: \.self) { flavor in
+                    Text(flavor.rawValue.capitalized)
+                }
+            }
+                .pickerStyle(SegmentedPickerStyle())
+
+            Text("Selected flavor: \(selectedFlavor.rawValue)")
+            Text("Selected topping: \(selectedTopping.rawValue)")
+
+            Divider()
+        }
+            .padding(.horizontal, 30)
+    }
+}
+
+struct EjemploPicker_Previews: PreviewProvider {
+    static var previews: some View {
+        EjemploPicker()
+    }
+}
+
+//----------EjemploSlider.swift--------------------
+
+//
+//  EjemploSlider.swift
+//  EjemplosSwiftUI
+//
+//  Created by Ion Jaureguialzo Sarasola on 27/11/20.
+//
+import SwiftUI
+
+// REF: Slider: https://developer.apple.com/documentation/swiftui/slider
+struct EjemploSlider: View {
+
+    @State private var speed = 50.0
+    @State private var isEditing = false
+
+    var body: some View {
+        VStack {
+            Slider(
+                value: $speed,
+                in: 0...100,
+                onEditingChanged: { editing in
+                    isEditing = editing
+                }
+            )
+            Text(String(format: "%.2f", speed))
+                .foregroundColor(isEditing ? .red : .blue)
+
+            Slider(
+                value: $speed,
+                in: 0...100,
+                step: 0.25,
+                onEditingChanged: { editing in
+                    isEditing = editing
+                },
+                minimumValueLabel: Text("0"),
+                maximumValueLabel: Text("100")
+            ) {
+                Text("Speed")
+            }
+            Text(String(format: "%.2f", speed))
+                .foregroundColor(isEditing ? .red : .blue)
+        }
+            .padding(.horizontal, 30)
+    }
+}
+
+struct EjemploSlider_Previews: PreviewProvider {
+    static var previews: some View {
+        EjemploSlider()
+    }
+}
+
+//-----------EjemploRotacion.swift-------------------
+
+//
+//  EjemploRotacion.swift
+//  EjemplosSwiftUI
+//
+//  Created by Ion Jaureguialzo Sarasola on 1/12/20.
+//
+import SwiftUI
+
+// REF: https://www.hackingwithswift.com/quick-start/swiftui/swiftuis-built-in-shapes
+// REF: https://www.hackingwithswift.com/books/ios-swiftui/changing-a-views-layout-in-response-to-size-classes
+struct EjemploRotacion: View {
+
+    @Environment(\.verticalSizeClass) var sizeClass
+
+    var body: some View {
+        ZStack {
+
+            if sizeClass == .regular {
+                VStack {
+                    Rectangle()
+                        .fill(Color("MiColor"))
+                        .frame(width: 200, height: 200)
+
+                    RoundedRectangle(cornerRadius: 25, style: .continuous)
+                        .fill(Color(.sRGB, red: 0.5, green: 0.5, blue: 0.5, opacity: 0.2))
+                        .frame(width: 300, height: 300)
+
+                    Capsule()
+                        .fill(Color.green)
+                        .frame(width: 250, height: 50)
+
+                    Ellipse()
+                        .fill(Color.blue)
+                        .frame(width: 100, height: 50)
+
+                    Circle()
+                        .fill(Color(UIColor.systemTeal))
+                        .frame(width: 100, height: 50)
+                }
+            } else {
+                HStack {
+                    RoundedRectangle(cornerRadius: 25, style: .continuous)
+                        .fill(Color("MiColor"))
+                        .frame(width: 100, height: 100)
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 25, style: .continuous)
+                        .fill(Color("MiColor"))
+                        .frame(width: 100, height: 100)
+                }
+            }
+
+            Image("Noa")
+                .mask(Circle())
+                .shadow(radius: 10)
+        }
+            .padding(30)
+    }
+}
+
+struct EjemploRotacion_Previews: PreviewProvider {
+    static var previews: some View {
+        EjemploRotacion()
+    }
+}
